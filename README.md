@@ -19,6 +19,7 @@ Usage:
 ```
 -- require widget source
 local button_setup_function = require("awesome-widgets.menu.button-sh-widget")
+-- setup widget
 local button_sh_widget = button_setup_function(shape, icon, bg_color, fg_color, hover_color, outer_margin, inner_margin, sh_command)
 ```
 Setup function parameters:
