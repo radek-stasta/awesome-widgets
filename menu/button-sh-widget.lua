@@ -4,6 +4,7 @@
 local wibox = require("wibox")
 local gears = require("gears")
 local awful = require("awful")
+local beautiful = require("beautiful")
 
 -- Widget for icon display
 local icon_widget = wibox.widget {
@@ -41,12 +42,12 @@ local button_widget = wibox.widget {
 
 -- Function for seting up all parameters
 -- Returns main button widget
-local setup = function (shape, icon, bg_color, fg_color, hover_color, outer_margin, inner_margin, click_shell_command)
+local setup = function (shape, icon, bg_color, fg_color, hover_color, outer_margin_factor, inner_margin_factor, click_shell_command)
     -- Icon widget setup
     icon_widget.image = gears.color.recolor_image(icon, fg_color)
 
     -- Inner margin widget setup
-    inner_margin_widget.margins = inner_margin
+    inner_margin_widget.margins = beautiful.menu_height * inner_margin_factor
 
     -- Background widget setup
     background_widget.bg = bg_color
@@ -55,7 +56,7 @@ local setup = function (shape, icon, bg_color, fg_color, hover_color, outer_marg
     background_widget:connect_signal("mouse::leave", function (c) c:set_bg(bg_color) end)
 
     -- Main button widget setup
-    button_widget.margins = outer_margin
+    button_widget.margins = beautiful.menu_height * outer_margin_factor
     button_widget:connect_signal("button::press", function (c) awful.spawn.easy_async_with_shell(click_shell_command, function () end) end)
 
     return button_widget

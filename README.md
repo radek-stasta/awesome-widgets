@@ -20,7 +20,7 @@ Usage:
 -- require widget source
 local button_setup_function = require("awesome-widgets.menu.button-sh-widget")
 -- setup widget
-local button_sh_widget = button_setup_function(shape, icon, bg_color, fg_color, hover_color, outer_margin, inner_margin, sh_command)
+local button_sh_widget = button_setup_function(shape, icon, bg_color, fg_color, hover_color, outer_margin_factor, inner_margin_factor, sh_command)
 ```
 Setup function parameters:
 - shape: shape of button widget, module gears.shape (ex. gears.shape.circle)
@@ -28,6 +28,23 @@ Setup function parameters:
 - bg_color: background color (ex. beautiful.bg_normal)
 - fg_color: foreground color of provided icon (ex beautiful.fg_normal)
 - hover_color: background color if hovered over (ex beautiful.bg_focus)
-- outer_margin: margin from top and bottom of wibox and left and right from other widgets
-- inner_margin: margin of icon from widget borders (you can resize icon within button itself with this)
+- outer_margin_factor: margin factor from top and bottom of wibar and left and right from other widgets. Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, outer_margin_factor = 0.25, so actual margins will be 8).
+- inner_margin_factor: margin factor of icon from widget borders (you can resize icon within button itself with this). Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, inner_margin_factor = 0.25, so actual margins will be 8).
 - sh_command: shell command to execute on click (ex. "feh --randomize --bg-fill ~/Pictures/*")
+
+### frame-widget
+Frame widget for wibar menu that can be used to hold another widgets inside of it
+
+Usage:
+```
+-- require widget source
+local frame_setup_function = require("awesome-widgets.menu.frame-widget")
+-- setup widget
+local frame_widget = frame_setup_function(shape, bg_color, outer_margin_factor, inner_margin_factor, widget)
+```
+Setup function parameters:
+- shape: shape of button widget, module gears.shape (ex. gears.shape.circle)
+- bg_color: background color (ex. beautiful.bg_normal)
+- outer_margin_factor: margin factor from top and bottom of wibar and left and right from other widgets. Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, outer_margin_factor = 0.25, so actual margins will be 8).
+- inner_margin_factor: margin factor of icon from widget borders (you can resize icon within button itself with this). Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, inner_margin_factor = 0.25, so actual margins will be 8).h
+- widget: widget to be shown inside frame widget
