@@ -46,5 +46,5 @@ Setup function parameters:
 - shape: shape of button widget, module gears.shape (ex. gears.shape.circle)
 - bg_color: background color (ex. beautiful.bg_normal)
 - outer_margin_factor: margin factor from top and bottom of wibar and left and right from other widgets. Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, outer_margin_factor = 0.25, so actual margins will be 8).
-- inner_margin_factor: margin factor of icon from widget borders (you can resize icon within button itself with this). Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, inner_margin_factor = 0.25, so actual margins will be 8).h
+- inner_margin_factor: margin factor of icon from widget borders (you can resize icon within button itself with this). Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, inner_margin_factor = 0.25, so actual margins will be 8).
 - widget: widget to be shown inside frame widget
