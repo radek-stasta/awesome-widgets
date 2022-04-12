@@ -9,47 +9,43 @@ local beautiful = require("beautiful")
 -- Function for seting up all parameters
 -- Returns main button widget
 local setup = function (shape, icon, bg_color, fg_color, hover_color, outer_margin_factor, inner_margin_factor, click_shell_command)
-    -- Icon widget setup
-    local icon_widget = wibox.widget {
-        widget = wibox.widget.imagebox,
-        resize = true
-    }
-    icon_widget.image = gears.color.recolor_image(icon, fg_color)
-
-    -- Inner margin widget setup
-    local inner_margin_widget = wibox.widget {
-        widget = wibox.container.margin,
-        {
-            layout = wibox.layout.align.horizontal,
-            icon_widget
-        }
-    }
-    inner_margin_widget.margins = beautiful.menu_height * inner_margin_factor
-
-    -- Background widget setup
     local background_widget = wibox.widget {
+        -- Background
         widget = wibox.container.background,
         shape_clip = true,
+        bg = bg_color,
+        shape = shape,
         {
             layout = wibox.layout.align.horizontal,
-            inner_margin_widget
+            {
+                -- Inner margin
+                widget = wibox.container.margin,
+                margins = beautiful.menu_height * inner_margin_factor,
+                {
+                    layout = wibox.layout.align.horizontal,
+                    {
+                        -- Icon
+                        widget = wibox.widget.imagebox,
+                        resize = true,
+                        image = gears.color.recolor_image(icon, fg_color)
+                    }
+                }
+            }
         }
     }
-    background_widget.bg = bg_color
-    background_widget.shape = shape
     background_widget:connect_signal("mouse::enter", function (c) c:set_bg(hover_color) end)
     background_widget:connect_signal("mouse::leave", function (c) c:set_bg(bg_color) end)
 
-    -- Main button widget setup
     local button_widget = wibox.widget {
+        -- Outer margin
         widget = wibox.container.margin,
+        top = beautiful.menu_height * outer_margin_factor,
+        bottom = beautiful.menu_height * outer_margin_factor,
         {
             layout = wibox.layout.align.horizontal,
             background_widget
         }
     }
-    button_widget.top = beautiful.menu_height * outer_margin_factor
-    button_widget.bottom = beautiful.menu_height * outer_margin_factor
     button_widget:connect_signal("button::press", function (c) awful.spawn.easy_async_with_shell(click_shell_command, function () end) end)
 
     return button_widget
