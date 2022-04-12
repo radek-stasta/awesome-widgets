@@ -14,6 +14,7 @@ Then you just need to require those widgets in your rc.lua file and call setup f
 ## Documentation
 ### button-sh-widget
 Button widget for wibar menu calling sh command. Can be used as application launcher or to perform any sh script.
+![button-sh-widget](https://github.com/radek-stasta/awesome-widgets/blob/main/preview/button-sh-widget.png)
 
 Usage:
 ```
