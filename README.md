@@ -12,47 +12,4 @@ git clone https://github.com/radek-stasta/awesome-widgets.git
 Then you just need to require those widgets in your rc.lua file and call setup function to get your widget. See documentation for each widget for more information how to use it.
 
 ## Documentation
-
-- [button-sh-widget](#button-sh-widget)
-- [frame-widget](#frame-widget)
-
-### button-sh-widget
-Button widget for wibar menu calling sh command. Can be used as application launcher or to perform any sh script.
-![button-sh-widget](https://github.com/radek-stasta/awesome-widgets/blob/main/preview/button-sh-widget.png)
-
-**Usage:**
-```
--- require widget source
-local button_setup_function = require("awesome-widgets.menu.button-sh-widget")
--- setup widget
-local button_sh_widget = button_setup_function(shape, icon, bg_color, fg_color, hover_color, outer_margin_factor, inner_margin_factor, sh_command)
-```
-**Setup function parameters:**
-- **shape:** shape of button widget, module gears.shape (ex. gears.shape.circle).
-- **icon:** path to icon displayed preferably from your theme file (ex. beautiful.wallpaper_icon).
-- **bg_color:** background color (ex. beautiful.bg_normal).
-- **fg_color:** foreground color of provided icon (ex beautiful.fg_normal).
-- **hover_color:** background color if hovered over (ex beautiful.bg_focus).
-- **outer_margin_factor:** margin factor from top and bottom of wibar. Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, outer_margin_factor = 0.25, so actual margins will be 8).
-- **inner_margin_factor:** margin factor of icon from widget borders (you can resize icon within button itself with this). Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, inner_margin_factor = 0.25, so actual margins will be 8).
-- **sh_command:** shell command to execute on click (ex. "feh --randomize --bg-fill ~/Pictures/*").
-
-### frame-widget
-Frame widget for wibar menu that can be used to hold another widgets inside of it
-![frame-widget](https://github.com/radek-stasta/awesome-widgets/blob/main/preview/frame-widget.png)
-
-**Usage:**
-```
--- require widget source
-local frame_setup_function = require("awesome-widgets.menu.frame-widget")
--- setup widget
-local frame_widget = frame_setup_function(shape, bg_color, outer_margin_factor, inner_margin_factor, widget, halign, forced_width)
-```
-**Setup function parameters:**
-- **shape:** shape of button widget, module gears.shape (ex. gears.shape.circle).
-- **bg_color:** background color (ex. beautiful.bg_normal).
-- **outer_margin_factor:** margin factor from top and bottom of wibar. Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, outer_margin_factor = 0.25, so actual margins will be 8).
-- **inner_margin_factor:** margin factor of icon from widget borders (you can resize icon within button itself with this). Actual margin is multiplied by wibar height to keep margins uniform no matter how big wibar is (ex. wibar height = 32, inner_margin_factor = 0.25, so actual margins will be 8).
-- **widget:** widget to be shown inside frame widget.
-- **halign (optional):** horizontal align of widget (ex. "left"). Default value is "center".
-- **forced_width (optional):** forced width of frame widget (ex. 100).
+You can find complete documentation in [Documentation](https://github.com/radek-stasta/awesome-widgets/wiki/Documentation) wiki page.
