@@ -6,7 +6,11 @@ local beautiful = require("beautiful")
 
 -- Function for seting up all parameters
 -- Returns main frame widget
-local setup = function (shape, bg_color, outer_margin_factor, inner_margin_factor, widget)
+local setup = function (shape, bg_color, outer_margin_factor, inner_margin_factor, widget, halign, forced_width)
+    if halign == nil then
+        halign = "center"
+    end
+
     local frame_widget = wibox.widget {
         -- Outer margin
         widget = wibox.container.margin,
@@ -25,8 +29,11 @@ local setup = function (shape, bg_color, outer_margin_factor, inner_margin_facto
                         -- Inner margin
                         widget = wibox.container.margin,
                         margins = beautiful.menu_height * inner_margin_factor,
+                        forced_width = forced_width,
                         {
-                            layout = wibox.layout.align.horizontal,
+                            -- Align
+                            widget = wibox.container.place,
+                            halign = halign,
                             widget
                         }
                     }
