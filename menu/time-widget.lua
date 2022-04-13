@@ -3,7 +3,6 @@
 -- Requies
 local wibox = require("wibox")
 local gears = require("gears")
-local awful = require("awful")
 
 -- Function for seting up all parameters
 -- Returns main time widget
@@ -14,11 +13,8 @@ local setup = function (refresh_interval, format, font, color)
     end
 
     -- Default format
-    local date_command
     if format == nil then
-        date_command = "date"
-    else
-        date_command = "date +\""..format.."\""
+        format = "%m/%d/%Y %I:%M %p"
     end
 
     local time_widget = wibox.widget {
@@ -32,13 +28,11 @@ local setup = function (refresh_interval, format, font, color)
         call_now = true,
         autostart = true,
         callback = function ()
-            awful.spawn.easy_async_with_shell(date_command, function (out)
-                if color == nil then
-                    time_widget.text = out
-                else
-                    time_widget.markup = "<span foreground='"..color.."'>"..out.."</span>"
-                end
-            end)
+            if color == nil then
+                time_widget.text = os.date(format)
+            else
+                time_widget.markup = "<span foreground='"..color.."'>"..os.date(format).."</span>"
+            end
         end
     }
 
