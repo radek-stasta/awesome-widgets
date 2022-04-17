@@ -4,9 +4,12 @@
 local wibox = require("wibox")
 local gears = require("gears")
 
+-- Module table
+local M = {}
+
 -- Function for seting up all parameters
 -- Returns main time widget
-local setup = function (refresh_interval, format, font, color)
+M.setup = function (refresh_interval, format, font, color)
     -- Default interval
     if refresh_interval == nil then
         refresh_interval = 1
@@ -39,4 +42,4 @@ local setup = function (refresh_interval, format, font, color)
     return time_widget
 end
 
-return setup
+return M

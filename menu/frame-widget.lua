@@ -4,9 +4,12 @@
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 
+-- Module table
+local M = {}
+
 -- Function for seting up all parameters
 -- Returns main frame widget
-local setup = function (shape, bg_color, outer_margin_factor, inner_margin_factor, widget, halign, forced_width)
+M.setup = function (shape, bg_color, outer_margin_factor, inner_margin_factor, widget, halign, forced_width)
     if halign == nil then
         halign = "center"
     end
@@ -45,4 +48,4 @@ local setup = function (shape, bg_color, outer_margin_factor, inner_margin_facto
     return frame_widget
 end
 
-return setup
+return M

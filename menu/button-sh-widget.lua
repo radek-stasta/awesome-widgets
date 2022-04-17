@@ -6,9 +6,12 @@ local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
 
+-- Module table
+local M = {}
+
 -- Function for seting up all parameters
 -- Returns main button widget
-local setup = function (shape, icon, bg_color, fg_color, hover_color, outer_margin_factor, inner_margin_factor, click_shell_command)
+M.setup = function (shape, icon, bg_color, fg_color, hover_color, outer_margin_factor, inner_margin_factor, click_shell_command)
     local background_widget = wibox.widget {
         -- Background
         widget = wibox.container.background,
@@ -51,4 +54,4 @@ local setup = function (shape, icon, bg_color, fg_color, hover_color, outer_marg
     return button_widget
 end
 
-return setup
+return M
