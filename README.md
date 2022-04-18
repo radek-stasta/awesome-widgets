@@ -1,6 +1,7 @@
 # :sparkles: awesome-widgets
-Widgets for awesome window manager
-**This project is still work in progress and new commits might break previous versions.**
+Widgets for awesome window manager.
+
+**PLEASE NOTE: This project is still work in progress and new commits might break previous versions.**
 
 ## :information_source: About
 Recently, I decided to completely reinstall my computer and start from scratch with system that I personally create from the ground up. For that, I choose awesome window manager, since it gives me freedom to do practically anything I want. As my first project in this endeavour, I need to create some basic building blocks and so I created awesome-widgets project, where I put all widgets I will create for my system. And since I like to share my work, I would love if someone else can also use some of those if they like them or maybe give me some advice since I am pretty much awesomewm noob, having started with it just a couple weeks ago. Below you will find installation instructions to use my widgets in your systems and also some documentation for each widget sou you don't need to study source code. Of course please feel free to open any issue you want to help me improve this project in any way. Also open issue with label 'question' if you have any question how to use my widgets, how I did any widget seen on preview images and so on.
