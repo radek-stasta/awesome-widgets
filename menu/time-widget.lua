@@ -4,42 +4,43 @@
 local wibox = require("wibox")
 local gears = require("gears")
 
--- Module table
-local M = {}
+-- Meta class
+TimeWidget = {
+    refresh_interval = nil,
+    format = nil,
+    font = nil,
+    color = nil,
+    widget = nil
+}
 
--- Function for seting up all parameters
--- Returns main time widget
-M.setup = function (refresh_interval, format, font, color)
-    -- Default interval
-    if refresh_interval == nil then
-        refresh_interval = 1
-    end
+function TimeWidget:new(refresh_interval, format, font, color)
+    local o = {}
+    setmetatable(o, {__index = self})
 
-    -- Default format
-    if format == nil then
-        format = "%m/%d/%Y %I:%M %p"
-    end
+    o.refresh_interval = refresh_interval or 1
+    o.format = format or "%m/%d/%Y %I:%M %p"
+    o.font = font or nil
+    o.color = color or nil
 
-    local time_widget = wibox.widget {
+    o.widget = wibox.widget {
         widget = wibox.widget.textbox,
-        font = font
+        font = o.font
     }
 
-    -- Refresh timer
     gears.timer {
-        timeout = refresh_interval,
+        timeout = o.refresh_interval,
         call_now = true,
         autostart = true,
         callback = function ()
-            if color == nil then
-                time_widget.text = os.date(format)
+            if o.color == nil then
+                o.widget.text = os.date(o.format)
             else
-                time_widget.markup = "<span foreground='"..color.."'>"..os.date(format).."</span>"
+                o.widget.markup = "<span foreground='"..o.color.."'>"..os.date(o.format).."</span>"
             end
         end
     }
 
-    return time_widget
+    return o
 end
 
-return M
+return TimeWidget

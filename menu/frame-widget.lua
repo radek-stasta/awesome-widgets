@@ -4,40 +4,54 @@
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 
--- Module table
-local M = {}
+-- Meta class
+FrameWidget = {
+    shape = nil,
+    bg_color = nil,
+    outer_margin_factor = nil,
+    inner_margin_factor = nil,
+    inside_widget = nil,
+    halign = nil,
+    forced_width = nil,
+    widget = nil
+}
 
--- Function for seting up all parameters
--- Returns main frame widget
-M.setup = function (shape, bg_color, outer_margin_factor, inner_margin_factor, widget, halign, forced_width)
-    if halign == nil then
-        halign = "center"
-    end
+function FrameWidget:new(shape, bg_color, outer_margin_factor, inner_margin_factor, inside_widget, halign, forced_width)
+    local o = {}
+    setmetatable(o, {__index = self})
 
-    local frame_widget = wibox.widget {
+    o.shape = shape
+    o.bg_color = bg_color
+    o.outer_margin_factor = outer_margin_factor
+    o.inner_margin_factor = inner_margin_factor
+    o.inside_widget = inside_widget
+    o.halign = halign or "center"
+    o.forced_width = forced_width or nil
+
+    o.widget = wibox.widget {
         -- Outer margin
         widget = wibox.container.margin,
-        top = beautiful.menu_height * outer_margin_factor,
-        bottom = beautiful.menu_height * outer_margin_factor,
+        top = beautiful.menu_height * o.outer_margin_factor,
+        bottom = beautiful.menu_height * o.outer_margin_factor,
         {
             layout = wibox.layout.align.horizontal,
             {
                 -- Background
                 widget = wibox.container.background,
-                bg = bg_color,
-                shape = shape,
+                bg = o.bg_color,
+                shape = o.shape,
                 {
                     layout = wibox.layout.align.horizontal,
                     {
                         -- Inner margin
                         widget = wibox.container.margin,
-                        margins = beautiful.menu_height * inner_margin_factor,
-                        forced_width = forced_width,
+                        margins = beautiful.menu_height * o.inner_margin_factor,
+                        forced_width = o.forced_width,
                         {
                             -- Align
                             widget = wibox.container.place,
-                            halign = halign,
-                            widget
+                            halign = o.halign,
+                            o.inside_widget
                         }
                     }
                 }
@@ -45,7 +59,7 @@ M.setup = function (shape, bg_color, outer_margin_factor, inner_margin_factor, w
         }
     }
 
-    return frame_widget
+    return o
 end
 
-return M
+return FrameWidget
