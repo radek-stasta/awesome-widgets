@@ -40,6 +40,7 @@ function FrameWidget:new(shape, bg_color, outer_margin_factor, inner_margin_fact
                 widget = wibox.container.background,
                 bg = o.bg_color,
                 shape = o.shape,
+                shape_clip = true,
                 {
                     layout = wibox.layout.align.horizontal,
                     {
