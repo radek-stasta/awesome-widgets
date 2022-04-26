@@ -69,7 +69,7 @@ function ButtonShWidget:new(shape, icon, bg_color, fg_color, hover_color, outer_
             background_widget
         }
     }
-    o.widget:connect_signal("button::press", function (c) awful.spawn.easy_async_with_shell(o.click_shell_command, function () end) end)
+    background_widget:connect_signal("button::press", function (c) awful.spawn.easy_async_with_shell(o.click_shell_command, function () end) end)
 
     return o
 end
