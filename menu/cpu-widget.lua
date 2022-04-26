@@ -80,7 +80,7 @@ function CpuWidget:new(format, font, color)
 
     o.widget = wibox.widget {
         widget = wibox.widget.textbox,
-        font = font
+        font = o.font
     }
 
     -- Refresh timer
@@ -109,7 +109,7 @@ function CpuWidget:new(format, font, color)
     return o
 end
 
--- Function returning numeric 
+-- Function returning numeric cpu percentage use
 function CpuWidget:get_cpu_usage_percent()
     return self.cpu_usage_percent
 end
