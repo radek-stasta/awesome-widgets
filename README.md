@@ -1,5 +1,5 @@
 # :sparkles: awesome-widgets
-Widgets for awesome window manager.
+Widgets for awesome window manager. I am using this widgets in my system for my personal needs so if you want to add or change functionality of some widget just let me know.
 
 **PLEASE NOTE: This project is still work in progress and new commits might break previous versions.**
 
