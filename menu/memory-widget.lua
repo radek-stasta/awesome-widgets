@@ -8,6 +8,8 @@ local naughty = require("naughty")
 -- Meta class
 MemoryWidget = {
     memory_use_percentage = nil,
+    memory_use_absolute = nil,
+    memory_total = nil,
 
     refresh_interval = nil,
     format = nil,
@@ -35,6 +37,12 @@ local calculate_memory_values = function(o, proc_lines)
         values[label_value_split[1]] = label_value_split[2]
     end
 
+    -- Save total memory
+    o.memory_total = math.floor((values["MemTotal"] / 1000000) * 10 + 0.5) / 10
+
+    -- Compute absolute memory use
+    o.memory_use_absolute = math.floor(((values["MemTotal"] - values["MemFree"] - values["Buffers"] - values["Cached"]) / 1000000) * 10 + 0.5) /10
+
     -- Compute memory percentage use
     o.memory_use_percentage = math.floor((((values["MemTotal"] - values["MemFree"] - values["Buffers"] - values["Cached"]) / values["MemTotal"]) * 100) + 0.5)
 end
@@ -50,6 +58,7 @@ local read_proc_meminfo = function ()
 end
 
 -- Constructor
+-- format: %t = memory_total, %a = memory_use_absolute, %p = memory_use_percentage
 function MemoryWidget:new(refresh_interval, format, font, color)
     local o = {}
     setmetatable(o, {__index = self})
@@ -74,11 +83,13 @@ function MemoryWidget:new(refresh_interval, format, font, color)
         callback = function ()
             calculate_memory_values(o, read_proc_meminfo())
 
-            local text
+            local text = o.format
             if o.format == nil then
                 text = o.memory_use_percentage
             else
-                text = string.format(o.format, o.memory_use_percentage)
+                text = text:gsub("%%t", o.memory_total)
+                text = text:gsub("%%a", o.memory_use_absolute)
+                text = text:gsub("%%p", o.memory_use_percentage)
             end
 
             if o.color == nil then
