@@ -9,6 +9,7 @@ local naughty = require("naughty")
 -- Meta class
 StorageWidget = {
     storage_use_percentage = nil,
+    storage_free_percentage = nil,
     storage_use_absolute = nil,
     storage_free = nil,
     storage_total = nil,
@@ -49,11 +50,12 @@ local get_storage_values = function(o)
         o.storage_use_absolute = values[2]
         o.storage_free = values[3]
         o.storage_use_percentage = values[4]
+        o.storage_free_percentage = 100 - values[4]
     end)
 end
 
 -- Constructor
--- format: %t = storage_total, %f = storage_free, %a = storage_use_absolute, %p = storage_use_percentage
+-- format: %t = storage_total, %f = storage_free, %a = storage_use_absolute, %p = storage_use_percentage, %q = storage_free_percentage
 function StorageWidget:new(refresh_interval, device, format, font, color)
     local o = {}
     setmetatable(o, {__index = self})
@@ -62,6 +64,7 @@ function StorageWidget:new(refresh_interval, device, format, font, color)
     o.storage_free = 0
     o.storage_use_absolute = 0
     o.storage_use_percentage = 0
+    o.storage_free_percentage = 100
 
     o.refresh_interval = refresh_interval
     o.device = device
@@ -90,6 +93,7 @@ function StorageWidget:new(refresh_interval, device, format, font, color)
                 text = text:gsub("%%f", o.storage_free)
                 text = text:gsub("%%a", o.storage_use_absolute)
                 text = text:gsub("%%p", o.storage_use_percentage)
+                text = text:gsub("%%q", o.storage_free_percentage)
             end
 
             if o.color == nil then
