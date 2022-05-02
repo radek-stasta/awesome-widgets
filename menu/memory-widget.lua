@@ -3,7 +3,6 @@
 -- Requires
 local wibox = require("wibox")
 local gears = require("gears")
-local naughty = require("naughty")
 
 -- Meta class
 MemoryWidget = {
@@ -63,6 +62,8 @@ function MemoryWidget:new(refresh_interval, format, font, color)
     local o = {}
     setmetatable(o, {__index = self})
 
+    o.memory_total = 0
+    o.memory_use_absolute = 0
     o.memory_use_percentage = 0
 
     o.refresh_interval = refresh_interval
